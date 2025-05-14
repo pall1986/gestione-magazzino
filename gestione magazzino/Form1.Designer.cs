@@ -38,6 +38,14 @@
             tBQuantità = new TextBox();
             listBox1 = new ListBox();
             btnInserisci = new Button();
+            listBox2 = new ListBox();
+            cBFornitore = new ComboBox();
+            btFilter = new Button();
+            btLoad = new Button();
+            btSave = new Button();
+            rbTipo = new RadioButton();
+            rbFornitore = new RadioButton();
+            cBTipo = new ComboBox();
             SuspendLayout();
             // 
             // lbType
@@ -111,12 +119,12 @@
             listBox1.ItemHeight = 15;
             listBox1.Location = new Point(48, 279);
             listBox1.Name = "listBox1";
-            listBox1.Size = new Size(649, 139);
+            listBox1.Size = new Size(368, 139);
             listBox1.TabIndex = 12;
             // 
             // btnInserisci
             // 
-            btnInserisci.Location = new Point(451, 51);
+            btnInserisci.Location = new Point(353, 76);
             btnInserisci.Name = "btnInserisci";
             btnInserisci.Size = new Size(75, 23);
             btnInserisci.TabIndex = 13;
@@ -124,11 +132,103 @@
             btnInserisci.UseVisualStyleBackColor = true;
             btnInserisci.Click += btnInserisci_Click;
             // 
+            // listBox2
+            // 
+            listBox2.FormattingEnabled = true;
+            listBox2.ItemHeight = 15;
+            listBox2.Location = new Point(467, 279);
+            listBox2.Name = "listBox2";
+            listBox2.Size = new Size(321, 139);
+            listBox2.TabIndex = 15;
+            listBox2.Visible = false;
+            // 
+            // cBFornitore
+            // 
+            cBFornitore.Enabled = true;
+            cBFornitore.FormattingEnabled = true;
+            cBFornitore.Location = new Point(618, 147);
+            cBFornitore.Name = "cBFornitore";
+            cBFornitore.Size = new Size(121, 23);
+            cBFornitore.TabIndex = 16;
+            cBFornitore.Visible = false;
+            // 
+            // btFilter
+            // 
+            btFilter.Location = new Point(559, 219);
+            btFilter.Name = "btFilter";
+            btFilter.Size = new Size(75, 23);
+            btFilter.TabIndex = 19;
+            btFilter.Text = "Filtra Ricerca";
+            btFilter.UseVisualStyleBackColor = true;
+            btFilter.Visible = false;
+            btFilter.Click += btFilter_Click;
+            // 
+            // btLoad
+            // 
+            btLoad.Location = new Point(353, 120);
+            btLoad.Name = "btLoad";
+            btLoad.Size = new Size(75, 23);
+            btLoad.TabIndex = 20;
+            btLoad.Text = "Carica File";
+            btLoad.UseVisualStyleBackColor = true;
+            // 
+            // btSave
+            // 
+            btSave.Location = new Point(353, 186);
+            btSave.Name = "btSave";
+            btSave.Size = new Size(75, 23);
+            btSave.TabIndex = 21;
+            btSave.Text = "Salva File";
+            btSave.UseVisualStyleBackColor = true;
+            // 
+            // rbTipo
+            // 
+            rbTipo.AutoSize = true;
+            rbTipo.Location = new Point(467, 77);
+            rbTipo.Name = "rbTipo";
+            rbTipo.Size = new Size(98, 19);
+            rbTipo.TabIndex = 22;
+            rbTipo.TabStop = true;
+            rbTipo.Text = "Filtra per Tipo";
+            rbTipo.UseVisualStyleBackColor = true;
+            rbTipo.Visible = false;
+            rbTipo.CheckedChanged += rbTipo_CheckedChanged;
+            // 
+            // rbFornitore
+            // 
+            rbFornitore.AutoSize = true;
+            rbFornitore.Location = new Point(467, 147);
+            rbFornitore.Name = "rbFornitore";
+            rbFornitore.Size = new Size(122, 19);
+            rbFornitore.TabIndex = 23;
+            rbFornitore.TabStop = true;
+            rbFornitore.Text = "Filtra Per Fornitore";
+            rbFornitore.UseVisualStyleBackColor = true;
+            rbFornitore.Visible = false;
+            rbFornitore.CheckedChanged += rbFornitore_CheckedChanged;
+            // 
+            // cBTipo
+            // 
+            cBTipo.FormattingEnabled = true;
+            cBTipo.Location = new Point(618, 77);
+            cBTipo.Name = "cBTipo";
+            cBTipo.Size = new Size(121, 23);
+            cBTipo.TabIndex = 24;
+            cBTipo.Visible = false;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(cBTipo);
+            Controls.Add(rbFornitore);
+            Controls.Add(rbTipo);
+            Controls.Add(btSave);
+            Controls.Add(btLoad);
+            Controls.Add(btFilter);
+            Controls.Add(cBFornitore);
+            Controls.Add(listBox2);
             Controls.Add(btnInserisci);
             Controls.Add(listBox1);
             Controls.Add(tBQuantità);
@@ -159,5 +259,15 @@
         private TextBox tBQuantità;
         private ListBox listBox1;
         private Button btnInserisci;
+        private ComboBox comboBox1;
+        private ListBox listBox2;
+        private ComboBox cBFornitore;
+        private Label label2;
+        private Button btFilter;
+        private Button btLoad;
+        private Button btSave;
+        private RadioButton rbTipo;
+        private RadioButton rbFornitore;
+        private ComboBox cBTipo;
     }
 }
