@@ -2,6 +2,10 @@ namespace gestione_magazzino
 {
     public partial class Form1 : Form
     {
+        string percorso_database = "magazzino.txt";
+        string riga = "";
+        StreamReader sr;
+        StreamWriter sw;
         struct Prodotto
         {
             public int Id;
@@ -14,6 +18,12 @@ namespace gestione_magazzino
         public Form1()
         {
             InitializeComponent();
+            if (!File.Exists(percorso_database))//Se il file non esiste disabilito il pulsante Inserisci
+            {
+                btnInserisci.Enabled = true;
+            }
+            else //Altrimenti abilito il pulsante Inserisci
+                btnInserisci.Enabled = false;
         }
         int PRODOTTI_IN_MAGAZZINO = 0;
         Prodotto[] prodotti = new Prodotto[100];
@@ -80,7 +90,8 @@ namespace gestione_magazzino
                 cBTipo.Visible = true;
                 cBTipo.Items.Clear();
                 for (int i = 0; i < PRODOTTI_IN_MAGAZZINO; i++)
-                    cBTipo.Items.Add(prodotti[i].Nome);  }
+                    cBTipo.Items.Add(prodotti[i].Nome);
+            }
             else { cBTipo.Visible = false; }
         }
 
@@ -88,7 +99,7 @@ namespace gestione_magazzino
         {
             if (rbFornitore.Checked == true)
             {
-                btFilter.Visible = true;                cBFornitore.Visible = true;
+                btFilter.Visible = true; cBFornitore.Visible = true;
                 cBFornitore.Items.Clear();
                 for (int i = 0; i < PRODOTTI_IN_MAGAZZINO; i++)
                     cBFornitore.Items.Add(prodotti[i].Fornitore);
@@ -99,6 +110,58 @@ namespace gestione_magazzino
         private void btFilter_Click(object sender, EventArgs e)
         {
             listBox2.Items.Clear();
+        }
+
+        private void btLoad_Click(object sender, EventArgs e)
+        {
+            if (!File.Exists(percorso_database))
+            {
+                MessageBox.Show("Nessun file presente! Inserisci i dati e poi premi Salva FIle");
+            }
+            else
+            {
+                //apri il file in sola lettura
+                sr = new StreamReader(percorso_database);
+                //Leggi il file riga per riga
+                //per ogni riga dividi la stringa in base al delimitatore ';'
+                //e memorizza i dati nei campi della struct Prodotto
+                //e aggiungi il prodotto alla listbox
+                //e incrementa il contatore PRODOTTI_IN_MAGAZZINO
+
+
+                PRODOTTI_IN_MAGAZZINO = 0;
+                listBox1.Items.Clear();
+                while ((riga = sr.ReadLine()) != null)
+                {
+                    string[] campi = riga.Split(';');
+                    if (campi.Length >= 4)
+                    {
+                        prodotti[PRODOTTI_IN_MAGAZZINO].Id = PRODOTTI_IN_MAGAZZINO + 1;
+                        prodotti[PRODOTTI_IN_MAGAZZINO].Nome = campi[0];
+                        prodotti[PRODOTTI_IN_MAGAZZINO].Prezzo = double.Parse(campi[1]);
+                        prodotti[PRODOTTI_IN_MAGAZZINO].Fornitore = campi[2];
+                        prodotti[PRODOTTI_IN_MAGAZZINO].Quantita = int.Parse(campi[3]);
+                        listBox1.Items.Add(prodotti[PRODOTTI_IN_MAGAZZINO].Nome + " "  + " " + prodotti[PRODOTTI_IN_MAGAZZINO].Fornitore + " "+ prodotti[PRODOTTI_IN_MAGAZZINO].Prezzo + " "+ + prodotti[PRODOTTI_IN_MAGAZZINO].Quantita);
+                        PRODOTTI_IN_MAGAZZINO++;
+                    }
+                }
+                sr.Close();
+                btnInserisci.Enabled = true;
+            }
+        }
+
+        private void btSave_Click(object sender, EventArgs e)
+        {
+            riga = "";
+            sw=new StreamWriter(percorso_database, false);
+            for (int i = 0; i < PRODOTTI_IN_MAGAZZINO; i++)
+            {
+                riga=riga+prodotti[i].Nome+";"+prodotti[i].Prezzo+";"+prodotti[i].Fornitore+";"+prodotti[i].Quantita;
+                sw.WriteLine(riga);
+                riga = "";
+            }
+            sw.Close();
+            MessageBox.Show("File salvato correttamente!");
         }
     }
 }

@@ -144,7 +144,6 @@
             // 
             // cBFornitore
             // 
-            cBFornitore.Enabled = true;
             cBFornitore.FormattingEnabled = true;
             cBFornitore.Location = new Point(618, 147);
             cBFornitore.Name = "cBFornitore";
@@ -171,6 +170,7 @@
             btLoad.TabIndex = 20;
             btLoad.Text = "Carica File";
             btLoad.UseVisualStyleBackColor = true;
+            btLoad.Click += btLoad_Click;
             // 
             // btSave
             // 
@@ -180,6 +180,7 @@
             btSave.TabIndex = 21;
             btSave.Text = "Salva File";
             btSave.UseVisualStyleBackColor = true;
+            btSave.Click += btSave_Click;
             // 
             // rbTipo
             // 
